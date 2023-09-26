@@ -1,16 +1,14 @@
 <?php
 
+//class Aninal
+
 abstract class Animal {
 
     protected $type = 'Cat';
 
-    public function setProp($type) {
-        $this->type = $type;
-    }
+    abstract public function setProp($type, $name, $birthday);
 
-    public function getProp() {
-        return "Type : $this->type";
-    } 
+    abstract public function getProp();
 }
 
 ?>

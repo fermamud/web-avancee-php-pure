@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Exercice 1 - Fernanda Frata Mamud</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <header><h1>Clinique Vétérinaire Chat Heureux</h1></header>
+    <header><h1>My Happy Pet</h1></header>
     <main>
         <?php
         require_once('Classe/Pet.php');
@@ -18,9 +18,9 @@
             <div>
                 <?php
                     $pet1 = new Pet();
-                    $pet1->setProps('Leo', '2017-07-01');
-                    echo $pet1->getProps();
+                    $pet1->setProp('Leo', '2017-07-01');
                 ?>
+                <?= $pet1->getProp() ?> 
             </div>
             <div>
                 <?php
@@ -33,9 +33,9 @@
             <div>
                 <?php
                     $pet2 = new Pet();
-                    $pet2->setProps('Catinga', '2018-01-19');
-                    echo $pet2->getProps();
+                    $pet2->setProp('Catinga', '2018-01-19', 'Dog');
                 ?>
+                <?= $pet2->getProp() ?>
             </div>
             <div>
                 <?php
@@ -48,8 +48,3 @@
     <footer>Contactez-nous</footer>
 </body>
 </html>
-
-<!-- $pet1->type = 'dog';
-var_dump($owner1);
-print_r($owner1);
-var_dump($pet1); -->

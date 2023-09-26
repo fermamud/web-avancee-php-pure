@@ -24,16 +24,6 @@ class Owner {
               <p>Phone: $this->phone</p>
               <p>Email: $this->email</p>";
     }
-
-
-    // function __destruct() {
-    //     echo "<br>Name : {$this->name}<br>
-    //           Adress : {$this->address}<br>
-    //           Zip Code : {$this->zipCode}<br>
-    //           Phone : {$this->phone}<br>
-    //           Email : {$this->email}";
-    // }
-    //posso inserir um getProp???
 }
 
 ?>
