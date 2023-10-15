@@ -1,7 +1,7 @@
 <?php
 require_once('Classe/CRUD.php');
 $crud = new CRUD;
-$usager = $crud->select('usager');
+$usager = $crud->selectAvecVilleNom('usager', 'genre', 'id_genre');
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +22,6 @@ $usager = $crud->select('usager');
     </header>
     <nav>
         <ul>
-            <li><a href="#boucle">Boucle d'oreille</a></li>
-            <li>Collier</li>
-            <li>Bague</li>
-            <li>Bracelet de cheville</li>
             <li>À propos</li>
             <li><a href="liste-produit.php">Liste des produits</a></li>
         </ul>
@@ -34,12 +30,11 @@ $usager = $crud->select('usager');
     <?php
         foreach($usager as $row) {
     ?>
-        <p>Id : <?= $row['id_usager']?></p>
-        <p>Nom : <?= $row['nom']?></p>
-        <p>Prenom : <?= $row['prenom']?></p>
-        <p>Genre : <?= $row['id_genre']?></p>
-        <a href="collaborateur-edit.php?id=<?= $row['id_usager'] ?>">Modifier vos informations</a>
-        <!-- TIRAR BR DEPOIS -->
+        <p>Nom : <?= $row['nom'] ?></p>
+        <p>Prenom : <?= $row['prenom'] ?></p>
+        <p>Genre : <?= $row['genre'] ?></p>
+        <a href="collaborateur-edit.php?id=<?= $row['id_usager'] ?>">Modifier vos informations</a> | 
+        <a href="collaborateur-delete.php?id=<?= $row['id_usager'] ?>">Supprimer collaborateur</a>
         <br>
         <br>
     <?php

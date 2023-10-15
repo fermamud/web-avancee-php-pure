@@ -32,8 +32,7 @@ $genre = $crud->select('genre');
     </nav>
     <main>
         <h1>Inserez vos Informations Personnels</h1>
-            <!-- inserir action -->
-            <form action="" method="post">
+            <form action="collaborateur-store.php" method="post">
                 <label>Nom
                     <input type="text" name="nom">
                 </label>

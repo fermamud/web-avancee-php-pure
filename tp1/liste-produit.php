@@ -1,5 +1,6 @@
 <?php
 require_once('Classe/CRUD.php');
+require_once('Classe/Footer.php');
 $crud = new CRUD;
 $produit = $crud->select('produit');
 ?>
@@ -22,7 +23,7 @@ $produit = $crud->select('produit');
     <nav>
         <ul>
             <li><a href="#boucle">Boucle d'oreille</a></li>
-            <li>Collier</li>
+            <li><a href="#collier">Collier</a></li>
             <li>Bague</li>
             <li>Bracelet de cheville</li>
             <li>À propos</li>
@@ -31,107 +32,47 @@ $produit = $crud->select('produit');
     </nav>
     <main>
         <h1>Fait main, avec amour</h1>
-        <div>
+        <div id="collier">
             <h2>Collier</h2>
             <?php
                 foreach($produit as $row) {
+                    if ($row['type'] == 'Collier') {
             ?>
-                <section>
-                    <img src="assets/img/collier.jpeg" alt="">
-                    <div>
-                        <p>Description : <?= $row['description']?></p>
-                        <p>Material : <?= $row['id_material']?></p>
-                        <p>Prix : <?= $row['prix']?></p>
-                        <p>Artiste : <?= $row['id_usager']?></p>
-                    </div>
-                </section>
+                    <section>
+                        <img src="assets/img/<?= $row['id_produit'] ?>.jpeg" alt="image_collier">
+                        <div>
+                            <p>Type : <?= $row['type']?></p>
+                            <p>Description : <?= $row['description']?></p>
+                            <p>Material : <?= $row['id_material']?></p>
+                            <p>Prix : <?= $row['prix']?></p>
+                            <p>Artiste : <?= $row['id_usager']?></p>
+                        </div>
+                    </section>
             <?php
+                    }
                 }
             ?>
-
-
-                <!-- <img src="assets/img/collier.jpeg" alt="">
-                <div>
-                    <p>
-                        Description : Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quasi voluptates
-                        eos
-                        laudantium vel eius veniam laborum! Libero, aliquid error dolores alias maiores illum id dolorum
-                        dicta
-                        expedita minima suscipit.
-                    </p>
-                    <p>
-                        Material : Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, ducimus ipsum.
-                        Nulla,
-                        aliquid, praesentium voluptatibus veniam, ex vel tempora dicta voluptas quo ipsam ea iste.
-                        Officia
-                        at
-                        illo consectetur nesciunt!
-                    </p>
-                </div> -->
-            <!-- </section>
-            <section>
-                <img src="assets/img/collier.jpeg" alt="">
-                <div>
-                    <p>
-                        Description : Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quasi voluptates
-                        eos
-                        laudantium vel eius veniam laborum! Libero, aliquid error dolores alias maiores illum id dolorum
-                        dicta
-                        expedita minima suscipit.
-                    </p>
-                    <p>
-                        Material : Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, ducimus ipsum.
-                        Nulla,
-                        aliquid, praesentium voluptatibus veniam, ex vel tempora dicta voluptas quo ipsam ea iste.
-                        Officia
-                        at
-                        illo consectetur nesciunt!
-                    </p>
-                </div>
-            </section> -->
         </div>
         <div id="boucle">
             <h2>Boucle d'oreille</h2>
-            <section>
-                <img src="assets/img/boucle.jpeg" alt="">
-                <div>
-                    <p>
-                        Description : Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quasi voluptates
-                        eos
-                        laudantium vel eius veniam laborum! Libero, aliquid error dolores alias maiores illum id dolorum
-                        dicta
-                        expedita minima suscipit.
-                    </p>
-                    <p>
-                        Material : Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, ducimus ipsum.
-                        Nulla,
-                        aliquid, praesentium voluptatibus veniam, ex vel tempora dicta voluptas quo ipsam ea iste.
-                        Officia
-                        at
-                        illo consectetur nesciunt!
-                    </p>
-                </div>
-            </section>
-            <section>
-                <img src="assets/img/boucle.jpeg" alt="">
-                <div>
-                    <p>
-                        Description : Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quasi voluptates
-                        eos
-                        laudantium vel eius veniam laborum! Libero, aliquid error dolores alias maiores illum id dolorum
-                        dicta
-                        expedita minima suscipit.
-                    </p>
-                    <p>
-                        Material : Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, ducimus ipsum.
-                        Nulla,
-                        aliquid, praesentium voluptatibus veniam, ex vel tempora dicta voluptas quo ipsam ea iste.
-                        Officia
-                        at
-                        illo consectetur nesciunt!
-                    </p>
-                </div>
-            </section>
+            <?php
+                foreach($produit as $row) {
+                    if ($row['type'] == 'Boucle d\'oreille') {
+            ?>
+                    <section>
+                        <img src="assets/img/<?= $row['id_produit'] ?>.jpeg" alt="image_boucle">
+                        <div>
+                            <p>Type : <?= $row['type']?></p>
+                            <p>Description : <?= $row['description']?></p>
+                            <p>Material : <?= $row['id_material']?></p>
+                            <p>Prix : <?= $row['prix']?></p>
+                            <p>Artiste : <?= $row['id_usager']?></p>
+                        </div>
+                    </section>
+            <?php
+                    }
+                }
+            ?>
         </div>
     </main>
     <footer>
@@ -144,6 +85,10 @@ $produit = $crud->select('produit');
             <img src="assets/img/whatsapp.svg" alt="">
         </div>
     </footer>
+    <?php
+    //$footer = new Footer;
+    //$footer2 = $footer->footer();
+    ?>
 </body>
 
 </html>

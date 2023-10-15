@@ -40,10 +40,8 @@ $genre = $crudGenre->select('genre');
     <main>
         <h1>Modification des Informations Personnels</h1>
         <!-- inserir action -->
-        <form action="" method="post">
-            <label>Id
-                <input type="text" name="id_usager" value="<?= $id; ?>">
-            </label>
+        <form action="collaborateur-update.php" method="post">
+            <input type="hidden" name="id_usager" value="<?= $id; ?>">
             <label>Nom
                 <input type="text" name="nom" value="<?= $nom; ?>">
             </label>
