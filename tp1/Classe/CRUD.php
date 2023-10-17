@@ -3,6 +3,7 @@
 class CRUD extends PDO {
 
     public function __construct() {
+        //parent::__construct('mysql:host=localhost; dbname=e2395117; port=3306; charset=utf8', 'e2395117', '6684b2NFufsVxbz31r7A');
         parent::__construct('mysql:host=localhost; dbname=ecommerce_tp1; port=3306; charset=utf8', 'root', '');
     }
 
@@ -49,14 +50,6 @@ class CRUD extends PDO {
             $stmt->bindValue(":$cle", $valeur);
         }
         $stmt->execute();
-
-        header('location: liste-collaborateurs.php');
-    }
-
-    public function selectAvecVilleNom($table1, $table2, $field) {
-        $sql = "SELECT id_usager, usager.nom, prenom, genre.nom AS genre FROM $table1 JOIN $table2 ON $table1.$field = $table2.$field ORDER BY id_usager";
-        $stmt = $this->query($sql);
-        return $stmt->fetchAll();
     }
 
     public function delete($table, $value, $field) {
@@ -64,7 +57,6 @@ class CRUD extends PDO {
         $stmt = $this->prepare($sql);
         $stmt->bindValue(":$field", $value);
         $stmt->execute();
-        header('location: liste-collaborateurs.php');
     }
 }
 

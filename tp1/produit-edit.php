@@ -3,16 +3,15 @@ if(isset($_GET['id']) && $_GET['id']!=null ){
     $id = $_GET['id'];
     require_once('Classe/CRUD.php');
     $crud = new CRUD;
-    $usager = $crud->selectId('usager', $id, 'id_usager');
-    extract($usager);
+    $produit = $crud->selectId('produit', $id, 'id_produit');
+    extract($produit);
 }else{
     header('location:index.php');
 }
 
-
 require_once('Classe/CRUD.php');
-$crudGenre = new CRUD;
-$genre = $crudGenre->select('genre');
+$crud = new CRUD;
+$material = $crud->select('material');
 
 ?>
 <!DOCTYPE html>
@@ -38,26 +37,29 @@ $genre = $crudGenre->select('genre');
         </ul>
     </nav>
     <main>
-        <h1>Modification des Informations Personnels</h1>
-        <form action="collaborateur-update.php" method="post">
-            <input type="hidden" name="id_usager" value="<?= $id; ?>">
-            <label>Nom :
-                <input type="text" name="nom" value="<?= $nom; ?>">
+        <h1>Modifier les Informations sur le Produit</h1>
+        <form action="produit-update.php" method="post">
+            <input type="hidden" name="id_produit" value="<?= $id; ?>">
+            <label>Type :
+                <input type="text" name="type" value="<?= $type; ?>">
             </label>
-            <label>Prenom :
-                <input type="text" name="prenom"  value="<?= $prenom; ?>">
+            <label>Description :
+                <input type="text" class="description" name="description"  value="<?= $description; ?>">
             </label>
-            <label>Genre :
-                <select name="id_genre" >
+            <label>Prix :
+                <input type="number" name="prix"  value="<?= $prix; ?>">
+            </label>
+            <label>Material :
+                <select name="id_material" >
                     <?php
-                        foreach($genre as $row) {
-                            if ($id_genre == $row['id_genre']) {
+                        foreach($material as $row) {
+                            if ($id_material == $row['id_material']) {
                     ?>
-                                <option selected value="<?= $id_genre ?>"><?= $row['nom'] ?></option>
+                                <option selected value="<?= $id_material ?>"><?= $row['description'] ?></option>
                     <?php
                             } else {
                             ?>
-                                <option value="<?= $row['id_genre'] ?>"><?= $row['nom'] ?></option>
+                                <option value="<?= $row['id_material'] ?>"><?= $row['description'] ?></option>
                             <?php
                             }
                         }

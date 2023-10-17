@@ -2,8 +2,8 @@
 
 class Footer extends PDO {
     public function footer() {
-?>
-    <footer>
+
+  return "  <footer>
         <div>
             @2023 - Fernanda Mamud
         </div>
@@ -12,8 +12,8 @@ class Footer extends PDO {
             <img src="assets/img/facebook.svg" alt="">
             <img src="assets/img/whatsapp.svg" alt="">
         </div>
-    </footer>
-<?php
+    </footer>";
+
 }
 
 }

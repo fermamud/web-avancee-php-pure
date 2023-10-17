@@ -1,9 +1,3 @@
-<?php
-require_once('Classe/CRUD.php');
-$crud = new CRUD;
-$usager = $crud->select('usager');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,33 +11,24 @@ $usager = $crud->select('usager');
 <body>
     <header>
         <img src="assets/img/logo.svg" alt="image_logo">
-        <p>Liste de Collaborateurs</p>
+        <p>Votre boutique en ligne préférée</p>
         <img src="assets/img/panier.svg" alt="image_panier">
     </header>
     <nav>
         <ul>
             <li>À propos</li>
             <li><a href="index.php">Liste des produits</a></li>
-            <li><a href="liste-genres.php">Liste des genres</a></li>
+            <li><a href="liste-collaborateurs.php">Liste des collaborateurs</a></li>
         </ul>
     </nav>
     <main>
-    <?php
-        foreach($usager as $row) {
-    ?>
-        <p>Usager : <?= $row['id_usager'] ?></p>
-        <p>Nom : <?= $row['nom'] ?></p>
-        <p>Prenom : <?= $row['prenom'] ?></p>
-        <p>Genre : <?php $genre = $crud->selectId('genre', $row['id_genre'], 'id_genre'); ?>
-        <?= $genre['nom'] ?></p>
-        <a href="collaborateur-edit.php?id=<?= $row['id_usager'] ?>">Modifier vos informations</a> | 
-        <a href="collaborateur-delete.php?id=<?= $row['id_usager'] ?>">Supprimer collaborateur</a>
-        <br>
-        <br>
-    <?php
-        }
-    ?>
-    <a href="create-collaborateur.php">Travaillez avec nous</a>
+        <h1>Inserez Nouveau Genre</h1>
+            <form action="genre-store.php" method="post">
+                <label>Nom
+                    <input type="text" name="nom">
+                </label>
+                <input type="submit" value="save">
+            </form>
     </main>
     <footer>
         <div>

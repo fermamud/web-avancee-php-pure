@@ -63,7 +63,7 @@ $produit = $crud->select('produit');
             ?>
                 <section>
                     <img src="assets/img/<?= $row['id_produit'] ?>.jpeg" alt="image_boucle">
-                    <div>
+                    <div class="produit">
                         <p>Type : <?= $row['type']?></p>
                         <p>Description : <?= $row['description']?></p>
                         <p>Material : <?= $row['id_material']?></p>
