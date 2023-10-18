@@ -3,7 +3,6 @@
 class CRUD extends PDO {
 
     public function __construct() {
-        //parent::__construct('mysql:host=localhost; dbname=e2395117; port=3306; charset=utf8', 'e2395117', '6684b2NFufsVxbz31r7A');
         parent::__construct('mysql:host=localhost; dbname=ecommerce_tp1; port=3306; charset=utf8', 'root', '');
     }
 

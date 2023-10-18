@@ -1,20 +1,20 @@
 <?php
 
-class Footer extends PDO {
-    public function footer() {
+class Footer {
 
-  return "  <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>";
+    public function getFooterHTML() {
 
-}
+    return '<footer>
+            <div>
+                @2023 - Fernanda Mamud
+            </div>
+            <div>
+                <img src="assets/img/instagram.svg" alt="icone_instagram">
+                <img src="assets/img/facebook.svg" alt="icone_facebook">
+                <img src="assets/img/whatsapp.svg" alt="icone_whatsapp">
+            </div>
+        </footer>';
+    }
 
 }
 ?>

@@ -1,3 +1,8 @@
+<?php
+require_once('Classe/Footer.php');
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,16 +35,9 @@
                 <input type="submit" value="save">
             </form>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>

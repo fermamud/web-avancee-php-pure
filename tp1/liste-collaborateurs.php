@@ -1,7 +1,11 @@
 <?php
 require_once('Classe/CRUD.php');
+require_once('Classe/Footer.php');
 $crud = new CRUD;
 $usager = $crud->select('usager');
+
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +35,6 @@ $usager = $crud->select('usager');
     <?php
         foreach($usager as $row) {
     ?>
-        <p>Usager : <?= $row['id_usager'] ?></p>
         <p>Nom : <?= $row['nom'] ?></p>
         <p>Prenom : <?= $row['prenom'] ?></p>
         <p>Genre : <?php $genre = $crud->selectId('genre', $row['id_genre'], 'id_genre'); ?>
@@ -45,16 +48,9 @@ $usager = $crud->select('usager');
     ?>
     <a href="create-collaborateur.php">Travaillez avec nous</a>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>

@@ -1,7 +1,11 @@
 <?php
 require_once('Classe/CRUD.php');
+require_once('Classe/Footer.php');
 $crud = new CRUD;
 $genre = $crud->select('genre');
+
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 
 <!DOCTYPE html>
@@ -40,16 +44,9 @@ $genre = $crud->select('genre');
     ?>
     <a href="create-genre.php">Inserez nouveau genre</a>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>

@@ -9,11 +9,11 @@ if(isset($_GET['id']) && $_GET['id']!=null ){
     header('location:index.php');
 }
 
+$genre = $crud->select('genre');
 
-require_once('Classe/CRUD.php');
-$crudGenre = new CRUD;
-$genre = $crudGenre->select('genre');
-
+require_once('Classe/Footer.php');
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,16 +68,9 @@ $genre = $crudGenre->select('genre');
             <input type="submit" value="save">
         </form>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>

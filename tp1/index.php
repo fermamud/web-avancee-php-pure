@@ -1,8 +1,11 @@
 <?php
 require_once('Classe/CRUD.php');
-//require_once('Classe/Footer.php');
+require_once('Classe/Footer.php');
 $crud = new CRUD;
 $produit = $crud->select('produit');
+
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +41,12 @@ $produit = $crud->select('produit');
             ?>
                 <section>
                     <img src="assets/img/<?= $row['id_produit'] ?>.jpeg" alt="image_collier">
-                    <div>
+                    <div class="produit">
                         <p>Type : <?= $row['type']?></p>
                         <p>Description : <?= $row['description']?></p>
-                        <p>Material : <?= $row['id_material']?></p>
+                        <p>Material :
+                        <?php $material = $crud->selectId('material', $row['id_material'], 'id_material'); ?>
+                        <?= $material['description']?></p>
                         <p>Prix : <?= $row['prix']?></p>
                         <p>Artiste : 
                         <?php $artiste = $crud->selectId('usager', $row['id_usager'], 'id_usager')?>
@@ -66,7 +71,9 @@ $produit = $crud->select('produit');
                     <div class="produit">
                         <p>Type : <?= $row['type']?></p>
                         <p>Description : <?= $row['description']?></p>
-                        <p>Material : <?= $row['id_material']?></p>
+                        <p>Material :
+                        <?php $material = $crud->selectId('material', $row['id_material'], 'id_material'); ?>
+                        <?= $material['description']?></p>
                         <p>Prix : <?= $row['prix']?> CAD</p>
                         <p>Artiste : 
                         <?php $artiste = $crud->selectId('usager', $row['id_usager'], 'id_usager')?>
@@ -83,19 +90,8 @@ $produit = $crud->select('produit');
         <br>
         <a href="create-produit.php">Insérer un nouveau produit</a>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
     <?php
-    //$footer = new Footer;
-    //$footer2 = $footer->footer();
+        echo $footerHTML;
     ?>
 </body>
 

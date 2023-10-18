@@ -1,7 +1,11 @@
 <?php
 require_once('Classe/CRUD.php');
+require_once('Classe/Footer.php');
 $crud = new CRUD;
 $genre = $crud->select('genre');
+
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 
 <!DOCTYPE html>
@@ -17,16 +21,13 @@ $genre = $crud->select('genre');
 <body>
     <header>
         <img src="assets/img/logo.svg" alt="image_logo">
-        <p>Votre boutique en ligne préférée</p>
+        <p>Insertion</p>
         <img src="assets/img/panier.svg" alt="image_panier">
     </header>
     <nav>
         <ul>
-            <li><a href="#boucle">Boucle d'oreille</a></li>
-            <li>Collier</li>
-            <li>Bague</li>
-            <li>Bracelet de cheville</li>
             <li>À propos</li>
+            <li><a href="index.php">Liste des Produits</a></li>
             <li><a href="liste-collaborateurs.php">Liste des collaborateurs</a></li>
         </ul>
     </nav>
@@ -53,16 +54,9 @@ $genre = $crud->select('genre');
                 <input type="submit" value="save">
             </form>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>

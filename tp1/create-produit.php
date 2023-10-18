@@ -1,8 +1,12 @@
 <?php
 require_once('Classe/CRUD.php');
+require_once('Classe/Footer.php');
 $crud = new CRUD;
 $material = $crud->select('material');
 $artiste = $crud->select('usager');
+
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 
 <!DOCTYPE html>
@@ -18,16 +22,13 @@ $artiste = $crud->select('usager');
 <body>
     <header>
         <img src="assets/img/logo.svg" alt="image_logo">
-        <p>Votre boutique en ligne préférée</p>
+        <p>Insertion</p>
         <img src="assets/img/panier.svg" alt="image_panier">
     </header>
     <nav>
         <ul>
-            <li><a href="#boucle">Boucle d'oreille</a></li>
-            <li>Collier</li>
-            <li>Bague</li>
-            <li>Bracelet de cheville</li>
             <li>À propos</li>
+            <li><a href="index.php">Liste des Produits</a></li>
             <li><a href="liste-collaborateurs.php">Liste des collaborateurs</a></li>
         </ul>
     </nav>
@@ -35,7 +36,10 @@ $artiste = $crud->select('usager');
         <h1>Inserez les Informations de Votre Produit</h1>
             <form action="produit-store.php" method="post">
                 <label>Type
-                    <input type="text" name="type">
+                    <select name="type" >
+                        <option value="Collier">Collier</option>
+                        <option value="Boucle">Boucle d'oreille</option>
+                    </select>
                 </label>
                 <label>Description
                     <input type="text" name="description">
@@ -68,16 +72,9 @@ $artiste = $crud->select('usager');
                 <input type="submit" value="save">
             </form>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>

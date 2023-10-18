@@ -9,10 +9,11 @@ if(isset($_GET['id']) && $_GET['id']!=null ){
     header('location:index.php');
 }
 
-require_once('Classe/CRUD.php');
-$crud = new CRUD;
 $material = $crud->select('material');
 
+require_once('Classe/Footer.php');
+$footer = new Footer;
+$footerHTML = $footer->getFooterHTML();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,16 +71,9 @@ $material = $crud->select('material');
             <input type="submit" value="save">
         </form>
     </main>
-    <footer>
-        <div>
-            @2023 - Fernanda Mamud
-        </div>
-        <div>
-            <img src="assets/img/instagram.svg" alt="">
-            <img src="assets/img/facebook.svg" alt="">
-            <img src="assets/img/whatsapp.svg" alt="">
-        </div>
-    </footer>
+    <?php
+        echo $footerHTML;
+    ?>
 </body>
 
 </html>
