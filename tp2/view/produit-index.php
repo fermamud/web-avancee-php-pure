@@ -28,7 +28,7 @@
                             {% endfor %}
                         </p>
                         <a href="{{path}}produit/edit/{{ produit.id_produit }}">Modifier les informations</a> | 
-                        <a href="produit-delete.php?id=<?= $row['id_produit'] ?>">Supprimer produit</a>
+                        <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
                     </div>
                 </section>
                 {% endif %}

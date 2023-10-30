@@ -42,6 +42,36 @@ abstract class CRUD extends PDO {
         $stmt->execute();
         return $this->lastInsertId();
     }
+
+    public function update($data) {
+        $champRequete = null;
+        foreach ($data as $cle => $valeur) {
+            $champRequete .= "$cle =:$cle, ";
+        }
+        $champRequete = rtrim($champRequete, ", ");
+
+        $sql = "UPDATE $this->table SET $champRequete WHERE $this->primaryKey =:$this->primaryKey";
+        $stmt = $this->prepare($sql);
+        foreach ($data as $cle => $valeur) {
+            $stmt->bindValue(":$cle", $valeur);
+        }
+        if($stmt->execute()){
+            return true;
+        }else{
+            return $stmt->errorInfo();
+        }
+    }
+
+    public function delete($value) {    
+        $sql = "DELETE FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$this->primaryKey", $value);
+        if($stmt->execute()){
+            return true;
+        }else{
+            return $stmt->errorInfo();
+        }
+    }
 }
 
 ?>

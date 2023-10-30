@@ -48,6 +48,15 @@ class ControllerProduit extends Controller {
 
     public function update() {
         print_r($_POST);
+        $produit = new Produit;
+        $update = $produit->update($_POST);
+        RequirePage::url('produit/index');
+    }
+
+    public function destroy($id) {
+        $produit = new Produit;
+        $delete = $produit->delete($id);
+        RequirePage::url('produit/index');
     }
 }
 ?>

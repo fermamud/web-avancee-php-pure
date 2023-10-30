@@ -1,6 +1,6 @@
 <?php
 
-define('PATH_DIR', 'http://localhost:80/WebAvancee22635-Fernanda/tp2/tp2/');
+define('PATH_DIR', 'http://localhost/WebAvancee22635-Fernanda/tp2/tp2_sansGit/');
 require_once('controller/Controller.php');
 require_once('library/View.php');
 require_once('library/RequirePage.php');
