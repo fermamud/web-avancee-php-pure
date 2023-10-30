@@ -15,9 +15,8 @@
         </header>
         <nav>
             <ul>
-                <li><a href="#boucle">Boucle d'oreille</a></li>
-                <li><a href="#collier">Collier</a></li>
                 <li>À propos</li>
-                <li><a href="{{path}}artiste">Liste des artistes</a></li>
+                <li><a href="{{path}}produit">Liste des produits</a></li>
+                <li><a href="{{path}}genre">Liste des genres</a></li>
             </ul>
         </nav>
