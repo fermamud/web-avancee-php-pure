@@ -15,9 +15,9 @@
         </header>
         <nav>
             <ul>
+                <li><a href="{{path}}home">Accueil</a></li>
                 <li><a href="#boucle">Boucle d'oreille</a></li>
                 <li><a href="#collier">Collier</a></li>
-                <li>À propos</li>
                 <li><a href="{{path}}artiste">Liste des artistes</a></li>
             </ul>
         </nav>

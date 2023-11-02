@@ -24,7 +24,6 @@ if ($url == '/') {
     $controllerPath = __DIR__ . "/controller/Controller" . $requestURL . ".php";
     echo $controllerPath;
     
-    // DIFERENTE DO MARCOS SE EU ESCREVER SO /HOME ELE NAO FUNCIONA, VER DPS
     if (file_exists($controllerPath)) {
         require_once($controllerPath);
         $controllerName = 'Controller' . $requestURL;
@@ -41,7 +40,6 @@ if ($url == '/') {
             echo "aqui";
         }
     } else {
-        echo 'entrei aqui';
         require_once('controller/ControllerHome.php');
         $controller = new ControllerHome;
         echo $controller->error('404');

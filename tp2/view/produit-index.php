@@ -37,11 +37,11 @@
     <div id="boucle">
         <h2>Boucle d'oreille</h2>
         {% for produit in produits %}
-            {% if produit.type == 'Boucle d\'oreille' %}
+            {% if produit.type == 'Boucle' %}
             <section>
                 <img src="{{path}}assets/img/{{ produit.id_produit }}.jpeg" alt="image_boucle">
                 <div class="produit">
-                    <p>Type : {{ produit.type }}</p>
+                    <p>Type : {{ produit.type }} d'oreille</p>
                     <p>Description : {{ produit.description }}</p>
                     <p>Material :
                         {% for material in materials %}
@@ -59,7 +59,7 @@
                     {% endfor %}
                     </p>
                     <a href="{{path}}produit/edit/{{ produit.id_produit }}">Modifier les informations</a> | 
-                    <a href="produit-delete.php?id=<?= $row['id_produit'] ?>">Supprimer produit</a>
+                    <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
                 </div>
             </section>
             {% endif %}

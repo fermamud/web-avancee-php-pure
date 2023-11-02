@@ -16,17 +16,26 @@ class ControllerGenre extends Controller {
         return Twig::render('genre-create.php');
     }
 
-    public function store() {
-        $genre = new Genre;
-        $insert = $genre->insert($_POST);  
-        
-        RequirePage::url('genre');
+    public function store() {  
+        if (isset($_POST['nom']) && ($_POST['nom'] != '')) {
+            $genre = new Genre;
+            $insert = $genre->insert($_POST);  
+            
+            RequirePage::url('genre');
+        } else {
+            RequirePage::url('genre');
+        }
     }
 
-    public function destroy($id) {
-        $genre = new Genre;
-        $delete = $genre->delete($id);
-        RequirePage::url('genre');
+    public function destroy($id = null) {
+        if ($id != null && is_numeric($id)) {
+            $genre = new Genre;
+            $delete = $genre->delete($id);
+
+            RequirePage::url('genre');
+        } else {
+            RequirePage::url('genre');
+        }
     }
 
 }

@@ -1,5 +1,4 @@
 {{ include('header.php') }}
-<!-- ADD FOOOOOTER -->
 <main>
 <h1>Inserez les Informations de Votre Produit</h1>
     <form action="{{path}}produit/store" method="post">

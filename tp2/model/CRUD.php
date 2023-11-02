@@ -4,7 +4,7 @@
 abstract class CRUD extends PDO {
 
     public function __construct() {
-        parent::__construct('mysql:host=localhost; dbname=ecommerce_tp1; port=3306; charset=utf8', 'root', '');
+        parent::__construct('mysql:host=localhost; dbname=ecommerce_tp2; port=3306; charset=utf8', 'root', '');
     }
 
     // mudar o id_produit dps pra poder usar em todas as situcoes

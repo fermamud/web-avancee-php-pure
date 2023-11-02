@@ -137,3 +137,15 @@ select {
   margin: 1rem;
   width: 15rem;
 }
+
+.accueil {
+  letter-spacing: 0.1rem;
+  padding: 0.5rem;
+  width: 50rem;
+}
+
+.alert {
+  color: red;
+  font-family: "Dancing";
+  font-size: 2rem;
+}

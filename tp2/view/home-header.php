@@ -10,7 +10,7 @@
     <body>
         <header>
             <img src="{{path}}assets/img/logo.svg" alt="image_logo">
-            <p>Votre boutique en ligne préférée</p>
+            <p>Bienvenue</p>
             <img src="{{path}}assets/img/panier.svg" alt="image_panier">
         </header>
         <nav>
@@ -18,5 +18,6 @@
                 <li><a href="{{path}}home">Accueil</a></li>
                 <li><a href="{{path}}produit">Liste des produits</a></li>
                 <li><a href="{{path}}artiste">Liste des artistes</a></li>
+                <li><a href="{{path}}genre">Liste des genres</a></li>
             </ul>
         </nav>
