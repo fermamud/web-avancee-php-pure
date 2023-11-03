@@ -19,5 +19,6 @@
                 <li><a href="#boucle">Boucle d'oreille</a></li>
                 <li><a href="#collier">Collier</a></li>
                 <li><a href="{{path}}artiste">Liste des artistes</a></li>
+                <li><a href="{{path}}genre">Liste des genres</a></li>
             </ul>
         </nav>

@@ -1,13 +1,11 @@
 <?php
 
-// ver melhor PDO
 abstract class CRUD extends PDO {
 
     public function __construct() {
         parent::__construct('mysql:host=localhost; dbname=ecommerce_tp2; port=3306; charset=utf8', 'root', '');
     }
 
-    // mudar o id_produit dps pra poder usar em todas as situcoes
     public function select($field = 'id_produit', $order = 'ASC') {
         $sql = "SELECT * FROM $this->table ORDER BY $field $order";
         $stmt = $this->query($sql);
@@ -21,26 +19,39 @@ abstract class CRUD extends PDO {
         if ($count == 1) {
             return $stmt->fetch();
         } else {
-            // OLHAR ISSO AQUI
             RequirePage::url('home/error/404');
         }
     }
 
     public function insert($data) {
+        // Scénario dans lequel existe un $this->fillable
+        if ($this->fillable) {
+            $data_keys = array_fill_keys($this->fillable, '');
+            $data = array_intersect_key($data, $data_keys);
 
-        //entender melhor isso
-        //  type, description, prix, id_material, id_usager
-        // :type, :description, :prix, :id_material, :id_usager
-        $nomChamp = implode(", ", array_keys($data));
-        $valeurChamp = ":" . implode(", :", array_keys($data));
+            $nomChamp = implode(", ", array_keys($data));
+            $valeurChamp = ":" . implode(", :", array_keys($data));
 
-        $sql = "INSERT INTO $this->table ($nomChamp) VALUES ($valeurChamp)";
-        $stmt = $this->prepare($sql);
-        foreach ($data as $cle => $valeur) {
-            $stmt->bindValue(":$cle", $valeur);
+            $sql = "INSERT INTO $this->table ($nomChamp) VALUES ($valeurChamp)";
+            $stmt = $this->prepare($sql);
+            foreach ($data as $cle => $valeur) {
+                $stmt->bindValue(":$cle", $valeur);
+            }
+            $stmt->execute();
+            return $this->lastInsertId();
+        // Scénario dans lequel n'existe pas un $this->fillable
+        } else {
+            $nomChamp = implode(", ", array_keys($data));
+            $valeurChamp = ":" . implode(", :", array_keys($data));
+
+            $sql = "INSERT INTO $this->table ($nomChamp) VALUES ($valeurChamp)";
+            $stmt = $this->prepare($sql);
+            foreach ($data as $cle => $valeur) {
+                $stmt->bindValue(":$cle", $valeur);
+            }
+            $stmt->execute();
+            return $this->lastInsertId();
         }
-        $stmt->execute();
-        return $this->lastInsertId();
     }
 
     public function update($data) {

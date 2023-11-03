@@ -1,5 +1,4 @@
 <?php
-echo "entrei no controller genre";
 RequirePage::model('CRUD');
 RequirePage::model('Genre');
 
@@ -17,7 +16,7 @@ class ControllerGenre extends Controller {
     }
 
     public function store() {  
-        if (isset($_POST['nom']) && ($_POST['nom'] != '')) {
+        if (isset($_POST['nom_genre']) && ($_POST['nom_genre'] != '')) {
             $genre = new Genre;
             $insert = $genre->insert($_POST);  
             

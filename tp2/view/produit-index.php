@@ -1,12 +1,15 @@
 {{ include('header.php') }}
-
-<!-- ADD FOOOOOTER -->
 <main>
+    {% if error_message is defined %}
+        <div class="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
     <h1>Fait main, avec amour</h1>
     <div id="collier">
-        <h2>Collier</h2>
-        {% for produit in produits %}
-            {% if produit.type == 'Collier' %}
+    {% for produit in produits %}
+        {% if produit.type == 'Collier' %}
+            <h2>Collier</h2>
             <section>
                 <img src="{{path}}assets/img/{{ produit.id_produit }}.jpeg" alt="image_collier">
                 <div class="produit">
@@ -31,13 +34,13 @@
                     <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
                 </div>
             </section>
-            {% endif %}
-        {% endfor %}
+        {% endif %}
+    {% endfor %}
     </div>
     <div id="boucle">
-        <h2>Boucle d'oreille</h2>
-        {% for produit in produits %}
-            {% if produit.type == 'Boucle' %}
+    {% for produit in produits %}
+        {% if produit.type == 'Boucle' %}
+            <h2>Boucle d'oreille</h2>
             <section>
                 <img src="{{path}}assets/img/{{ produit.id_produit }}.jpeg" alt="image_boucle">
                 <div class="produit">
@@ -62,8 +65,8 @@
                     <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
                 </div>
             </section>
-            {% endif %}
-        {% endfor %}
+        {% endif %}
+    {% endfor %}
     </div>
     <br>
     <a href="{{path}}produit/create">Insérer un nouveau produit</a>

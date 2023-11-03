@@ -17,6 +17,7 @@
             <ul>
                 <li><a href="{{path}}home">Accueil</a></li>
                 <li><a href="{{path}}produit">Liste des produits</a></li>
+                <li><a href="{{path}}artiste">Liste des artistes</a></li>
                 <li><a href="{{path}}genre">Liste des genres</a></li>
             </ul>
         </nav>

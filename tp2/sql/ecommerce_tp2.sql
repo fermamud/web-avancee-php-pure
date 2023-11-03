@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `genre` (
   `id_genre` int(11) NOT NULL,
-  `nom` varchar(20) NOT NULL
+  `nom_genre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `genre`
 --
 
-INSERT INTO `genre` (`id_genre`, `nom`) VALUES
+INSERT INTO `genre` (`id_genre`, `nom_genre`) VALUES
 (1, 'Féminin'),
 (2, 'Masculin'),
 (3, 'Non binaire');

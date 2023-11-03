@@ -1,6 +1,6 @@
 {{ include('header.php') }}
 <main>
-<h1>Inserez les Informations de Votre Produit</h1>
+    <h1>Inserez les Informations de Votre Produit</h1>
     <form action="{{path}}produit/store" method="post">
         <label>Type
             <select name="type">
@@ -15,7 +15,7 @@
             <input type="number" name="prix">
         </label>
         <label>Material
-            <select name="id_material" >
+        <select name="id_material" >
                 {% for material in materials %}
                     <option value="{{ material.id_material}}">{{ material.description }}</option>
                 {% endfor %}

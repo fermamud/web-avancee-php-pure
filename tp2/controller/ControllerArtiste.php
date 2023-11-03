@@ -1,5 +1,4 @@
 <?php
-echo "entrei no controller collaborateur";
 RequirePage::model('CRUD');
 RequirePage::model('Artiste');
 RequirePage::model('Genre');
@@ -16,26 +15,35 @@ class ControllerArtiste extends Controller {
     }
 
     public function create() {
-        $genre = new Genre;
-        $selectGenre = $genre->select('id_genre');
-
-        return Twig::render('artiste-create.php', ['genres'=>$selectGenre]);
+        return Twig::render('artiste-create.php');
     }
 
     public function store() {
-        if (isset($_POST['nom']) && ($_POST['nom'] != '') && isset($_POST['prenom']) && ($_POST['prenom'] != '') && isset($_POST['id_genre']) && ($_POST['id_genre'] != '')) {
+        // Condition si toutes les informations nécessaires ont été correctement saisies
+        if (isset($_POST['nom']) && ($_POST['nom'] != '') && isset($_POST['prenom']) && ($_POST['prenom'] != '') && isset($_POST['nom_genre']) && ($_POST['nom_genre'] != '')) {
+            // Instanciation de la classe Genre pour qu'un nouveau genre soit créé dans la BD en même temps qu'un artiste est créé
+            $genre = new Genre;
+            $insertGenre = $genre->insert($_POST);
+            $_POST['id_genre'] = $insertGenre;
+
             $artiste = new Artiste;
             $insert = $artiste->insert($_POST);  
             
             RequirePage::url('artiste');
-        } elseif ((!isset($_POST['nom'])) || (!isset($_POST['prenom'])) || (!isset($_POST['id_genre']))) {
+        
+        // Condition si la personne essaie de saisir des informations sans être passée par le lien d'insertion d'artiste
+        } elseif ((!isset($_POST['nom'])) || (!isset($_POST['prenom'])) || (!isset($_POST['nom_genre']))) {
             $error_message = "Le lien 'Travaillez avec nous' doivent être accédé avant.";
 
             return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
-        } elseif (($_POST['nom'] == '') || ($_POST['prenom'] == '') || ($_POST['id_genre'] == '')) {
+
+        // Condition si la personne essaie d'envoyer un formulaire avec des champs vides        
+        } elseif (($_POST['nom'] == '') || ($_POST['prenom'] == '') || ($_POST['nom_genre'] == '')) {
             $error_message = "Toutes les données doivent être saisies.";
 
             return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
+        
+        // Redirection des pages pour les cas d'erreurs qui n'ont pas de traitement spécifique
         } else {
             RequirePage::url('artiste');
         }
@@ -49,18 +57,32 @@ class ControllerArtiste extends Controller {
             $selectGenre = $genre->select('id_genre');
     
             return Twig::render('artiste-edit.php', ['artiste'=>$selectId, 'genres'=>$selectGenre]);
-
         } else {
             RequirePage::url('artiste');
         }
     }
 
     public function update() {
+        // Condition si toutes les informations nécessaires ont été correctement saisies
         if (isset($_POST['nom']) && ($_POST['nom'] != '') && isset($_POST['prenom']) && ($_POST['prenom'] != '') && isset($_POST['id_genre']) && ($_POST['id_genre'] != '')) {           
             $artiste = new Artiste;
             $update = $artiste->update($_POST);
 
             RequirePage::url('artiste');
+        
+        // Condition si la personne essaie de saisir des informations sans être passée par le lien de modification des informations
+        } elseif ((!isset($_POST['nom'])) || (!isset($_POST['prenom'])) || (!isset($_POST['id_genre']))) {
+            $error_message = "Le lien 'Modifier vos informations' doivent être accédé avant.";
+
+            return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
+
+        // Condition si la personne essaie d'envoyer un formulaire avec des champs vides
+        } elseif (($_POST['nom'] == '') || ($_POST['prenom'] == '') || ($_POST['id_genre'] == '')) {
+            $error_message = "Toutes les données doivent être saisies.";
+
+            return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
+        
+        // Redirection des pages pour les cas d'erreurs qui n'ont pas de traitement spécifique
         } else {
             RequirePage::url('artiste');
         }

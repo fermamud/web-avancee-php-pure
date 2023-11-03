@@ -1,5 +1,10 @@
 {{ include('header.php') }}
 <main>
+    {% if error_message is defined %}
+        <div class="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
     <h1>Modifier les Informations sur le Produit</h1>
     <form action="{{path}}produit/update" method="post">
         <input type="hidden" name="id_produit" value="{{ produit.id_produit}}">
@@ -23,7 +28,6 @@
                 {% endfor %}
             </select>
         </label>
-
         <input type="submit" value="save">
     </form>
 </main>

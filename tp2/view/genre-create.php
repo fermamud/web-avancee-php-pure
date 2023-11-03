@@ -3,7 +3,7 @@
     <h1>Inserez Nouveau Genre</h1>
     <form action="{{path}}genre/store" method="post">
         <label>Nom
-            <input type="text" name="nom">
+            <input type="text" name="nom_genre">
         </label>
         <input type="submit" value="save">
     </form>
