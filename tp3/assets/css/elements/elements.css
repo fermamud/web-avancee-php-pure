@@ -87,6 +87,7 @@ footer {
 
 footer img {
   width: 2rem;
+  opacity: 0.5;
 }
 
 h1 {
@@ -159,6 +160,36 @@ select {
 
     & li {
       padding: 0;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  font-family: "Dancing";
+  justify-content: center;
+  padding-top: 1rem;
+
+  & h3 {
+    color: rgb(163, 61, 61);
+    font-size: 2rem;
+  }
+
+  & label {
+    font-size: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  & input[type="submit"] {
+    border-color: rgb(163, 61, 61);
+    border-radius: 1rem 0 1rem 0;
+    cursor: pointer;
+    height: 3rem;
+    width: 7rem;
+
+    &:hover {
+      background-color: rgb(163, 61, 61);
+      color: white;
     }
   }
 }

@@ -1,4 +1,5 @@
 <?php
+
 RequirePage::model('CRUD');
 RequirePage::model('Artiste');
 RequirePage::model('Genre');
@@ -15,39 +16,7 @@ class ControllerArtiste extends Controller {
         return Twig::render('liste-artiste.php', ['artistes'=>$selectArtiste, 'genres'=>$selectGenre]);
     }
 
-    //apagar
-    // public function create() {
-    //     return Twig::render('artiste-create.php');
-    // }
-
-    // public function store() {
-    //     $validation = new Validation;
-    //     extract($_POST);
-    //     $validation->name('nom')->value($nom)->max(45)->min(3);
-    //     $validation->name('prenom')->value($prenom)->max(45)->min(3);
-    //     $validation->name('nom_genre')->value($nom_genre)->max(20)->min(3);
-
-    //     if(!$validation->isSuccess()) {
-    //         $errors = $validation->displayErrors();
-    //         return Twig::render('artiste-create.php', ['errors' => $errors]);
-    //         exit();
-    //     } else {
-    //         $genre = new Genre;
-    //         $insertGenre = $genre->insert($_POST);
-    //         $_POST['id_genre'] = $insertGenre;
-
-    //         $artiste = new Artiste;
-    //         //$update = $artiste->update($_POST);
-    //         $insert = $artiste->insert($_POST);
-    //         RequirePage::url('artiste');
-    //     }
-    // }
-
-    public function edit($id = null) {
-        // echo $id;
-        // var_dump($_SESSION);
-        // die();
-
+    public function edit($id = null) {  
 
         if (isset($_SESSION) && $_SESSION['privilege'] == 1 && $id != null) {
             $artiste = new Artiste;
@@ -57,7 +26,7 @@ class ControllerArtiste extends Controller {
     
             return Twig::render('artiste-edit.php', ['artiste'=>$selectId, 'genres'=>$selectGenre]);
         } else {
-            RequirePage::url('artiste', ['errors' => 'errado']);
+            RequirePage::url('artiste');
         }
  
     }
@@ -97,6 +66,8 @@ class ControllerArtiste extends Controller {
                 $artiste = new Artiste;
                 $delete = $artiste->delete($id);
 
+                RequirePage::url('artiste');
+            } else {
                 RequirePage::url('artiste');
             }
         } else {

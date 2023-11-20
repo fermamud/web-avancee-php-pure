@@ -1,4 +1,4 @@
-{{ include('artiste-header.php') }}
+{{ include('header.php') }}
 <main>
     {% for artiste in artistes %}
     <p>Nom : {{ artiste.nom }}</p>
@@ -12,14 +12,12 @@
     </p>
     {% if guest == false %}
         {% if session.privilege == 1 %}
-            <a href="{{path}}artiste/edit/{{ artiste.id_usager }}">Modifier vos informations</a> | 
+            <a href="{{path}}artiste/edit/{{ artiste.id_usager }}">Modifier les informations</a> | 
             <a href="{{path}}artiste/destroy/{{ artiste.id_usager }}">Supprimer collaborateur</a>
         {% endif %}
     {% endif %}
     <br>
     <br>
     {% endfor %}
-    <!-- apagar esse trecho -->
-    <!-- <a href="{{path}}artiste/create">Travaillez avec nous</a> -->
 </main>
 {{ include('footer.php') }}

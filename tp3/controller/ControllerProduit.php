@@ -53,21 +53,17 @@ class ControllerProduit extends Controller {
 
                 //Gestion des images reçues
                 $target_dir = "/WebAvancee22635-Fernanda/tp3/view/uploads/";
-                //$target_dir = IMAGE_PATH . "view/uploads/";
                 $target_file = $target_dir . basename($_FILES["image"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-                //Vérifiez si le fichier image est une image réelle ou une fausse image
+                // Vérifiez si le fichier image est une image réelle ou une fausse image
                 if(isset($_POST["submit"])) {
-                    //var_dump($_FILES);
                     if ($_FILES["image"]["tmp_name"]) {               
                         $check = getimagesize($_FILES["image"]["tmp_name"]);
                         if($check !== false) {
-                            //echo "File is an image - " . $check["mime"] . ".";
                             $uploadOk = 1;
                         } else {
-                            //echo "File is not an image.";
                             $uploadOk = 0;
                         }
                     } else {
@@ -78,7 +74,6 @@ class ControllerProduit extends Controller {
 
                 // Vérifiez si le fichier existe déjà
                 if (file_exists($_SERVER['DOCUMENT_ROOT'] . $target_file)) {
-                    //echo "Sorry, file already exists.";
                     $uploadOk = 0;
                     $errors = "Le fichier existe déjà.";
                     return Twig::render('produit-index.php', ['errors' => $errors]);
@@ -86,17 +81,17 @@ class ControllerProduit extends Controller {
 
 
                 if ($uploadOk == 0) {
-                    //echo "Sorry, your file was not uploaded.";
                     $errors = "Votre fichier n'a pas été téléchargé.";
                     return Twig::render('produit-index.php', ['errors' => $errors]);
-                // si tout va bien, essayez de télécharger le fichier
+
+                // Si tout va bien, essayez de télécharger le fichier
                 } else {
 
                     // Donner un nom et une direction à l'image
                     $uploadfile = $_SERVER['DOCUMENT_ROOT'].$target_dir.$_FILES["image"]["name"];
                     
                     if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile)) {
-                        //echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+
                         // Unset le post submit qui a aidé avec le téléchargement d'images
                         unset($_POST['submit']);
                         $_POST['image'] = $_FILES["image"]['name'];
@@ -104,21 +99,10 @@ class ControllerProduit extends Controller {
                         $insert = $produit->insert($_POST);
                         RequirePage::url('produit');
                     } else {
-                        //echo "Sorry, there was an error uploading your file.";
                         $errors = "Une erreur s'est produite lors du téléchargement de votre fichier.";
                         return Twig::render('produit-index.php', ['errors' => $errors]);
                     }
                 }
-
-
-
-
-                //apagar apos fazer testes
-                // unset($_POST['submit']);
-                // $_POST['image'] = $_FILES["image"]['name'];
-                    
-                // $insert = $produit->insert($_POST);
-                // RequirePage::url('produit');
             }
         } else {
             RequirePage::url('produit');
@@ -197,4 +181,5 @@ class ControllerProduit extends Controller {
         }
     }
 }
+
 ?>

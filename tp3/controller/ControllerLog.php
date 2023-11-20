@@ -5,24 +5,22 @@ RequirePage::model('Log');
 class ControllerLog extends Controller {
 
     public function index() {
-        //var_dump($_SERVER);
-
+        // Créer la structure du tableau associative avec les données que nous voulons voir en résultat.
         $logData = [
             'adresse_ip' => $_SERVER['REMOTE_ADDR'],
             'nom' => $_SERVER['HTTP_USER_AGENT'],
             'date' => date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
-            'page' => $_SERVER['REQUEST_URI']
+            'page' => $_SERVER['REQUEST_URI'],
+            'usager' => ((isset($_SESSION['privilege'])) && ($_SESSION['privilege'] == 1 || $_SESSION['privilege'] == 2)) ? 'admin ou emploi' : 'guest'
         ];
  
-
-        //duas funcoes, insert eu chamo no index
         $log = new Log;
         $selectLog = $log->insert($logData);
     }
 
     public function affichage() {
 
-        //tbm procuro o affiche
+        // Affichage du journal de bord
         $logAffichage = new Log;
         $selectLogAffichage = $logAffichage->select('id');
 

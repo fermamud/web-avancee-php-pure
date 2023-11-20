@@ -77,11 +77,10 @@ abstract class CRUD extends PDO {
         $sql = "DELETE FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
         $stmt = $this->prepare($sql);
         $stmt->bindValue(":$this->primaryKey", $value);
-        if($stmt->execute()){
+        if ($stmt->execute()){
             return true;
-        }else{
+        } else {
             RequirePage::url('home/error/404');
-            //return $stmt->errorInfo();
         }
     }
 }

@@ -1,4 +1,4 @@
-{{ include('genres-header.php') }}
+{{ include('header.php') }}
 <main>
 {% for genre in genres %}
     <p>Nom : {{ genre.nom_genre }}</p> 

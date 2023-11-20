@@ -1,4 +1,4 @@
-{{ include('artiste-header.php') }}
+{{ include('header.php') }}
 <main>
     <h1>Inserez vos Informations Personnels</h1>
     <form action="{{path}}artiste/store" method="post">

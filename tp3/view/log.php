@@ -1,4 +1,3 @@
-<p>entrei aqui</p>
 {{ include('header.php') }}
 <main>
     {% for log in logs %}
@@ -6,7 +5,8 @@
     <p>Adresse Ip : {{ log.adresse_ip }}</p>
     <p>Date : {{ log.date }}</p>
     <p>Nom : {{ log.nom }}</p>
-    <p>Nom : {{ log.page }}</p>
+    <p>Page : {{ log.page }}</p>
+    <p>Usager privilege : {{ log.usager }}</p>
     <br>
     <br>
     {% endfor %}
