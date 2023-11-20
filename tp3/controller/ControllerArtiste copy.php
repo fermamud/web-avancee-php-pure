@@ -2,6 +2,7 @@
 RequirePage::model('CRUD');
 RequirePage::model('Artiste');
 RequirePage::model('Genre');
+RequirePage::library('Validation');
 
 class ControllerArtiste extends Controller {
 
@@ -19,38 +20,37 @@ class ControllerArtiste extends Controller {
     }
 
     public function store() {
-        // Condition si toutes les informations nécessaires ont été correctement saisies
-        if (isset($_POST['nom']) && ($_POST['nom'] != '') && isset($_POST['prenom']) && ($_POST['prenom'] != '') && isset($_POST['nom_genre']) && ($_POST['nom_genre'] != '')) {
-            // Instanciation de la classe Genre pour qu'un nouveau genre soit créé dans la BD en même temps qu'un artiste est créé
+        $validation = new Validation;
+        extract($_POST);
+        $validation->name('nom')->value($nom)->max(45)->min(3);
+        $validation->name('prenom')->value($prenom)->max(45)->min(3);
+        $validation->name('nom_genre')->value($nom_genre)->max(20)->min(3);
+
+        if(!$validation->isSuccess()) {
+            $errors = $validation->displayErrors();
+
+            // return Twig::render('artiste-create.php', ['errors' => $errors, 'artiste' => $_POST]);
+            return Twig::render('artiste-create.php', ['errors' => $errors]);
+            exit();
+        } else {
             $genre = new Genre;
             $insertGenre = $genre->insert($_POST);
             $_POST['id_genre'] = $insertGenre;
 
             $artiste = new Artiste;
-            $insert = $artiste->insert($_POST);  
-            
-            RequirePage::url('artiste');
-        
-        // Condition si la personne essaie de saisir des informations sans être passée par le lien d'insertion d'artiste
-        } elseif ((!isset($_POST['nom'])) || (!isset($_POST['prenom'])) || (!isset($_POST['nom_genre']))) {
-            $error_message = "Le lien 'Travaillez avec nous' doivent être accédé avant.";
-
-            return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
-
-        // Condition si la personne essaie d'envoyer un formulaire avec des champs vides        
-        } elseif (($_POST['nom'] == '') || ($_POST['prenom'] == '') || ($_POST['nom_genre'] == '')) {
-            $error_message = "Toutes les données doivent être saisies.";
-
-            return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
-        
-        // Redirection des pages pour les cas d'erreurs qui n'ont pas de traitement spécifique
-        } else {
+            //$update = $artiste->update($_POST);
+            $insert = $artiste->insert($_POST);
             RequirePage::url('artiste');
         }
     }
 
     public function edit($id = null) {
-        if ($id != null) {
+        // echo $id;
+        // var_dump($_SESSION);
+        // die();
+
+
+        if (isset($_SESSION) && $_SESSION['privilege'] == 1 && $id != null) {
             $artiste = new Artiste;
             $selectId = $artiste->selectId($id);
             $genre = new Genre;
@@ -58,31 +58,34 @@ class ControllerArtiste extends Controller {
     
             return Twig::render('artiste-edit.php', ['artiste'=>$selectId, 'genres'=>$selectGenre]);
         } else {
-            RequirePage::url('artiste');
+            RequirePage::url('artiste', ['errors' => 'errado']);
         }
+ 
     }
 
     public function update() {
-        // Condition si toutes les informations nécessaires ont été correctement saisies
-        if (isset($_POST['nom']) && ($_POST['nom'] != '') && isset($_POST['prenom']) && ($_POST['prenom'] != '') && isset($_POST['id_genre']) && ($_POST['id_genre'] != '')) {           
-            $artiste = new Artiste;
-            $update = $artiste->update($_POST);
+        // Pour vous assurer que certaines informations ont été saisies et ne pas autoriser l'accès à la mise à jour via URL
+        if (isset($_POST) && !empty($_POST)) {
+        $validation = new Validation;
+        extract($_POST);
+        $validation->name('nom')->value($nom)->max(45)->min(5);
+        $validation->name('prenom')->value($prenom)->max(45)->min(5);
 
-            RequirePage::url('artiste');
-        
-        // Condition si la personne essaie de saisir des informations sans être passée par le lien de modification des informations
-        } elseif ((!isset($_POST['nom'])) || (!isset($_POST['prenom'])) || (!isset($_POST['id_genre']))) {
-            $error_message = "Le lien 'Modifier vos informations' doivent être accédé avant.";
+            if(!$validation->isSuccess()) {
+                $genre = new Genre;
+                $selectGenre = $genre->select('id_genre');
+                $errors = $validation->displayErrors();
 
-            return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
+                return Twig::render('artiste-edit.php', ['errors' => $errors, 'genres'=>$selectGenre, 'artiste' => $_POST]);
+                exit();
+            } else {
+                $genre = new Genre;
+                $selectGenre = $genre->select('id_genre');
 
-        // Condition si la personne essaie d'envoyer un formulaire avec des champs vides
-        } elseif (($_POST['nom'] == '') || ($_POST['prenom'] == '') || ($_POST['id_genre'] == '')) {
-            $error_message = "Toutes les données doivent être saisies.";
-
-            return Twig::render('liste-artiste.php', ['error_message' => $error_message]);
-        
-        // Redirection des pages pour les cas d'erreurs qui n'ont pas de traitement spécifique
+                $artiste = new Artiste;
+                $update = $artiste->update($_POST);
+                RequirePage::url('artiste');
+            }
         } else {
             RequirePage::url('artiste');
         }

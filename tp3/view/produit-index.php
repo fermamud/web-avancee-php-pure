@@ -1,15 +1,12 @@
 {{ include('header.php') }}
 <main>
-    {% if error_message is defined %}
-        <div class="alert">
-            {{ error_message }}
-        </div>
-    {% endif %}
+    <span class="error">{{ errors | raw }}</span>
+    </span>
     <h1>Fait main, avec amour</h1>
     <div>
     {% for produit in produits %}
         <section>
-            <img src="{{path}}assets/img/{{ produit.id_produit }}.jpeg" alt="image_collier">
+            <img src="{{path}}view/uploads/{{ produit.image }}" alt="image_accessoire">
             <div class="produit">
                 <p>Type : {{ produit.type }}</p>
                 <p>Description : {{ produit.description }}</p>
@@ -28,13 +25,26 @@
                         {% endif %}     
                     {% endfor %}
                 </p>
-                <a href="{{path}}produit/edit/{{ produit.id_produit }}">Modifier les informations</a> | 
-                <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
+                {% if guest == false %}
+                    {% if session.privilege == 1 %}
+                        <a href="{{path}}produit/edit/{{ produit.id_produit }}">Modifier les informations</a>  
+                        | <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
+                    {% else %}
+                        {% if session.id_usager == produit.id_usager %}
+                            <a href="{{path}}produit/edit/{{ produit.id_produit }}">Modifier les informations</a>  
+                            | <a href="{{path}}produit/destroy/{{ produit.id_produit }}">Supprimer produit</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
             </div>
         </section>
     {% endfor %}
     </div>
     <br>
-    <a href="{{path}}produit/create">Insérer un nouveau produit</a>
+    {% if guest == false %}
+        {% if session.privilege == 1 %}
+            <a href="{{path}}produit/create">Insérer un nouveau produit</a>
+        {% endif %}
+    {% endif %}
 </main>
 {{ include('footer.php') }}

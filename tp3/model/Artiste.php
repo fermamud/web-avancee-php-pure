@@ -6,7 +6,7 @@ class Artiste extends CRUD {
     protected $primaryKey = 'id_usager';
 
     //mudar???
-    protected $fillable = ['id_usager', 'nom', 'prenom', 'id_genre'];
+    //protected $fillable = ['id_usager', 'nom', 'prenom', 'id_genre'];
 
     public function checkUser($username, $password) {
         $sql = "SELECT * FROM $this->table WHERE username = ?";

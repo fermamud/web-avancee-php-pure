@@ -10,16 +10,16 @@
             {% endif %}    
         {% endfor %}
     </p>
-    <a href="{{path}}artiste/edit/{{ artiste.id_usager }}">Modifier vos informations</a> | 
-    <a href="{{path}}artiste/destroy/{{ artiste.id_usager }}">Supprimer collaborateur</a>
+    {% if guest == false %}
+        {% if session.privilege == 1 %}
+            <a href="{{path}}artiste/edit/{{ artiste.id_usager }}">Modifier vos informations</a> | 
+            <a href="{{path}}artiste/destroy/{{ artiste.id_usager }}">Supprimer collaborateur</a>
+        {% endif %}
+    {% endif %}
     <br>
     <br>
     {% endfor %}
-    {% if error_message is defined %}
-        <div class="alert">
-            {{ error_message }}
-        </div>
-    {% endif %}
-    <a href="{{path}}artiste/create">Travaillez avec nous</a>
+    <!-- apagar esse trecho -->
+    <!-- <a href="{{path}}artiste/create">Travaillez avec nous</a> -->
 </main>
 {{ include('footer.php') }}

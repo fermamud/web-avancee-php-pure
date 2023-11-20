@@ -12,16 +12,13 @@ require_once('controller/ControllerLog.php');
 
 $url = isset($_GET["url"]) ? explode ('/', ltrim($_GET["url"], '/')) : '/';
 
-var_dump($_FILES);
+//var_dump($_FILES);
 // var_dump($_SERVER);
-// if ($_SESSION && ($_SESSION['privilege'] == 1)) {
-//     if ($_SERVER) {
-//         $log = new ControllerLog;
 
-        //essa deixei comentada
-        //$log->index();
-//     }
-// }
+//Gestion do mon journal de bord
+//$log = new ControllerLog;
+//echo $log->index();
+
 
 if ($url == '/') {
     require_once('controller/ControllerHome.php');
@@ -36,27 +33,35 @@ if ($url == '/') {
         require_once($controllerPath);
         $controllerName = 'Controller' . $requestURL;
         $controller = new $controllerName;
-        //FAZER MAIS TESTES AQUI!!!!!!!!!!!!!!!
-        //if (isset($url[1])) {
-        //     $method = $url[1];
-        //     if (method_exists($controller, $method)) {
-        //         echo $controller->$method(); 
-        //         if (isset($url[2])) echo $controller->$method($url[2]); 
-        //     } else {
-        //         echo $controller->index();
-        //     }           
-        // } else {
-        //     echo $controller->index();
-        // }
-        if (isset($url[1])) {
+        if (isset($url[1]) && method_exists($controller, $url[1])) {
             $method = $url[1];
-            if (isset($url[2])) {
-                echo $controller->$method($url[2]); 
-            } else {
-                // Gestion des erreurs si l'utilisateur tente de saisir une méthode qui n'existe pas
-                if (method_exists($controller, $method)) echo $controller->$method();
-                else echo $controller->index();
+            if(isset($url[2])){
+                echo $controller->$method($url[2]);
+            }else{
+                echo $controller->$method();
             }
+
+            
+            //$method = $url[1];
+            //if (isset($url[2])) {
+            // if (isset($url[2])) {
+            //     $value = $url[2];
+            //     if ($value) echo "value exists";
+            //     var_dump($url);
+            //     var_dump($url[2]);
+                // die();
+                // Gestion des erreurs si l'utilisateur tente de saisir une valeur qui n'existe pas
+                //if (method_exists($controller, $value)) echo $controller->$method($value);
+                //else echo $controller->index();
+                //die();
+                //if ($url[2]) {
+                //else echo $controller->$method();
+
+            //} else {
+                // Gestion des erreurs si l'utilisateur tente de saisir une méthode qui n'existe pas
+                //if (method_exists($controller, $method)) echo $controller->$method();
+                //else echo $controller->index();
+            //}
         } else {
             echo $controller->index();
         }
