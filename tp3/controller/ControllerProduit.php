@@ -135,6 +135,7 @@ class ControllerProduit extends Controller {
     }
 
     public function update() {
+        // Assurer que les informations nécessaires ont été saisies et que l'utilisateur ne tente pas de faire une mise à jour via l'URL.
         if (isset($_POST) && !empty($_POST)) {
             $validation = new Validation;
             extract($_POST);

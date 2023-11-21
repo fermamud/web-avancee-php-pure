@@ -2,10 +2,14 @@
 <main>
 {% for genre in genres %}
     <p>Nom : {{ genre.nom_genre }}</p> 
-    <a href="{{path}}genre/destroy/{{ genre.id_genre }}">Supprimer</a>
+    {% if session.privilege == 1 %}
+        <a href="{{path}}genre/destroy/{{ genre.id_genre }}">Supprimer</a>
+    {% endif %}
     <br>
     <br>
 {% endfor %}
-<a href="{{path}}genre/create">Inserez nouveau genre</a>
+{% if session.privilege == 1 %}
+    <a href="{{path}}genre/create">Inserez nouveau genre</a>
+{% endif %}
 </main>
 {{ include('footer.php') }} 

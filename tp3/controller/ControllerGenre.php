@@ -30,8 +30,7 @@ class ControllerGenre extends Controller {
 
             if(!$validation->isSuccess()) {
                 $errors = $validation->displayErrors();
-
-                // return Twig::render('genre-create.php', ['errors' => $errors, 'genre' => $_POST]);
+                
                 return Twig::render('genre-create.php', ['errors' => $errors]);
                 exit();
             } else {

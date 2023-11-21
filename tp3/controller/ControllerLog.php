@@ -3,7 +3,6 @@ RequirePage::model('CRUD');
 RequirePage::model('Log');
 
 class ControllerLog extends Controller {
-
     public function index() {
         // Créer la structure du tableau associative avec les données que nous voulons voir en résultat.
         $logData = [
